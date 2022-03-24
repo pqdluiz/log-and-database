@@ -9,6 +9,7 @@ export class LogsService {
   constructor(@InjectModel('Logger') private readonly logger: Model<Logger>) {}
 
   log(data: Logger) {
-    this.logger.create(data);
+    const { email, name, operation } = data;
+    return this.logger.create({ email, name, operation });
   }
 }
