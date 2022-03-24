@@ -5,12 +5,13 @@ on:
     types: [created]
 
 jobs:
-  build:
+  build_local:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 16.x
+          cache: 'yarn'
       - run: yarn
       - run: yarn test
