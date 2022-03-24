@@ -1,1 +1,1 @@
-export const mongo = '';
+export const mongo = process.env.DATABASE;

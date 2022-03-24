@@ -24,10 +24,12 @@
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^2.0.0",
     "@nestjs/core": "^8.4.2",
     "@nestjs/mongoose": "^9.0.3",
     "@nestjs/platform-express": "^8.0.0",
     "@prisma/client": "^3.11.0",
+    "dotenv": "^16.0.0",
     "git-cz": "^4.8.0",
     "mongoose": "^6.2.8",
     "prisma": "^3.11.0",
@@ -68,6 +70,8 @@
       "json",
       "ts"
     ],
+    "verbose": true,
+    "testTimeout": 5000,
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
