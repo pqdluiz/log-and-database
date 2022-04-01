@@ -13,9 +13,6 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     MongooseModule.forRoot(mongo),
     MongooseModule.forFeature([{ name: 'Logger', schema: LoggerModel }]),
-    ConfigModule.forRoot({
-      envFilePath: `${process.env.DATABASE}.env`,
-    }),
   ],
   providers: [UsersService, LogsService],
   controllers: [UsersController],
