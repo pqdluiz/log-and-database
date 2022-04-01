@@ -1,22 +1,32 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { UsersModule } from '../src/users/users.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
-describe('AppController (e2e)', () => {
-  let app: INestApplication;
+import { UsersModule } from '../src/users/users.module';
+import { mongo } from '../src/config/mongo';
+import { LoggerModel } from '../src/logs/entity/logs.entity';
+
+describe('UserController (e2e)', () => {
+  let users: INestApplication;
 
   beforeEach(async () => {
+    jest.setTimeout(5000);
+
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [UsersModule],
+      imports: [
+        UsersModule,
+        MongooseModule.forRoot(mongo),
+        MongooseModule.forFeature([{ name: 'Logger', schema: LoggerModel }]),
+      ],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
-    await app.init();
+    users = moduleFixture.createNestApplication();
+    await users.init();
   });
 
   it('/ (GET)', () => {
-    return request(app.getHttpServer())
+    return request(users.getHttpServer())
       .get('/')
       .expect(200)
       .expect('Hello World!');
