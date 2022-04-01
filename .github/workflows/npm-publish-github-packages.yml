@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build_local:
+  developer:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,3 +17,4 @@ jobs:
           cache: 'yarn'
       - run: yarn
       - run: yarn test
+      - run: yarn test:e2e
