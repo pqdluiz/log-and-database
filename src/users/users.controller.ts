@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { User } from "@prisma/client";
+import { User } from '@prisma/client';
+import { LogsStatus } from 'src/logs/enum/logs.enum';
 
 import { LogsService } from '../logs/logs.service';
 import { UsersService } from './users.service';
@@ -11,26 +12,22 @@ export class UsersController {
     private readonly loggerService: LogsService,
   ) {}
 
-  @Get()
+  @Get('/')
   getUser(@Body() data: User): Promise<User[]> {
-    const { name, email } = data;
-
     this.loggerService.log({
-      name: name,
-      email: email,
-      operation: 'get_users',
+      data: data,
+      operation: LogsStatus.GET_USER,
+      create_At: new Date(),
     });
     return this.userService.get(data);
   }
 
-  @Post()
+  @Post('/')
   postUser(@Body() data: User): Promise<User> {
-    const { name, email } = data;
-
     this.loggerService.log({
-      name: name,
-      email: email,
-      operation: 'post_users',
+      data: data,
+      operation: LogsStatus.POST_USER,
+      create_At: new Date(),
     });
     return this.userService.post(data);
   }
